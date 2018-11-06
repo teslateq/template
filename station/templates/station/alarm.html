@@ -1,0 +1,85 @@
+{%  extends 'base.html' %}
+{% block content %}
+
+<div class="row">
+  <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+    <div class="panel panel-primary ">
+        <div class="panel-heading">
+           Cảnh báo alarm qua Email {{stations.display_name}}
+        </div>
+        <div class="panel-body ">
+            <form>
+                <div class="form-group row">
+                    <div class="form-group col-md-6">
+                      <label >Email người gửi</label>
+                      <input type="email" class="form-control" placeholder="Email người gửi">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label >Email người nhận</label>
+                      <input type="email" class="form-control"placeholder="Email người nhận">
+                    </div>
+                </div>
+                <label >Cài đặt ngưỡng an toàn của pH (pH)</label>
+                <div class="form-group row">
+                    <div class="form-group col-md-6">
+                      <input type="number" class="form-control" placeholder="Giá trị pH mức thấp">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <input type="number" class="form-control"placeholder="Giá trị pH mức cao">
+                    </div>
+                </div>
+                <label >Cài đặt ngưỡng an toàn của Clo dư (mg/l)</label>
+                <div class="form-group row">
+                    <div class="form-group col-md-6">
+                      <input type="number" class="form-control" placeholder="Giá trị Clo dư mức thấp">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <input type="number" class="form-control"placeholder="Giá trị Clo dư mức cao">
+                    </div>
+                </div>
+
+                <label >Cài đặt ngưỡng an toàn của Độ  đục (NTU)</label>
+                <div class="form-group row">
+                    <div class="form-group col-md-6">
+                      <input type="number" class="form-control" placeholder="Giá trị Độ đục mức thấp">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <input type="number" class="form-control"placeholder="Giá trị Độ đục mức cao">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="text-center">
+                      <button type="submit" class="btn btn-primary">Lưu</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>
+</div>
+<script type="application/javascript">
+$(function() {
+    $("table").each(function() {
+        var $this = $(this);
+        var newrows = [];
+        $("table tbody tr").each(function(){
+            var i = 0;
+            $(this).find("td").each(function(){
+                i++;
+                if(newrows[i] === undefined) { newrows[i] = $("<tr></tr>"); }
+                newrows[i].append($(this));
+            });
+        });
+        $("table tbody tr").remove();
+        $.each(newrows, function(){
+            $this.append(this);
+        });
+    });
+
+    return false;
+});
+</script>
+{% endblock content %}
+
+

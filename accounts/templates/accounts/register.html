@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="{% static 'accounts/css/login.css' %}" type="text/css">
+    <title>{% block title %}{% endblock title %}</title>
+</head>
+<body>
+<div class="container-fluid">
+
+<div class="container" style=" padding-top:120px;">
+    	<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="panel panel-login">
+					<div class="panel-heading">
+						<div class="row">
+							<div class="col-xs-12">
+								<a href="#" id="register-form-link" style="	color: #029f5b;
+	font-size: 18px;">Register</a>
+							</div>
+						</div>
+						<hr>
+					</div>
+
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-lg-12">
+								 {% if error %}
+                                    <div class="alert alert-danger text-center" role="alert">
+									  <strong>{{ error }}</strong>
+									</div>
+								{% endif %}
+                                {% if alarm %}
+									<div class="alert alert-warning text-center" role="alert">
+									  <strong>{{ alarm }}</strong>
+									</div>
+								{% endif %}
+								{% if success %}
+									<div class="alert alert-success text-center" role="alert">
+								  	<strong>{{ success }}</strong>
+									</div>
+									</br>
+									<div class="form-group">
+										<div class="row">
+											<div class="col-sm-6 col-sm-offset-3">
+												<input type="button" onclick="location.href='/account/';" tabindex="4" class="form-control btn btn-register" value="Login Now">
+											</div>
+										</div>
+									</div>
+								{% endif %}
+
+								<form  id="register-form"action="{% url 'accounts:register' %}" method="post" role="form" style="">
+                                     {% csrf_token %}
+									<div class="form-group">
+                                        {{ form.username }}
+									</div>
+									<div class="form-group">
+                                        {{ form.email }}
+									</div>
+									<div class="form-group">
+                                        {{ form.password }}
+									</div>
+									<div class="form-group">
+                                        {{ form.password_repeat }}
+									</div>
+									{% if not success  %}
+									<div class="form-group">
+										<div class="row">
+											<div class="col-sm-6 col-sm-offset-3">
+												<input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now">
+											</div>
+										</div>
+									</div>
+									{% endif %}
+
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{#<script src="{% static 'accounts/js/login.js' %}"></script>#}
+</body>
+</html>
+

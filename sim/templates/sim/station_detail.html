@@ -1,0 +1,7 @@
+<div><a href="/station/{{ station.id }}" class="station">{{ station.name}}</a></div>
+{% for station_config in station.stationconfig_set.all %}
+  <div class="config_value">
+    <div class="name">{{ station_config.name }}</div>
+    <div class="value">{{ station_config.stationconfigvalue_set.last.value }}</div>
+  </div>
+{% endfor %}

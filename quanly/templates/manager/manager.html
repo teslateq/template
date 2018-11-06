@@ -1,0 +1,113 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Teslateq,teslateq,tesla" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    {% block head %} {% endblock head %}
+    <link rel="stylesheet" href="{% static '/accounts/style.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static '/accounts/css/login.css' %}" type="text/css">
+    <link rel="icon" type="image/png" href=" {{ project.logo_company.url }}" >
+    <title>{{ project.name_project }}</title>
+</head>
+{% block css %}{% endblock css %}
+<body>
+    <div class="container-fluid "  style="background:#000000;">
+        {% if user.is_authenticated%}
+        <div style="text-align:right;margin:10px;">
+            <a href="{% url 'accounts:profile_view' %}" style="color:#ffffff;">
+                <span class="glyphicon glyphicon-user"></span> {{ user }}</a>
+            <a href="{% url 'accounts:logout' %}" style="color:#ffffff;">
+               <span class="glyphicon glyphicon-log-in"></span> Logout</a>
+        </div>
+        {% endif %}
+    </div>
+<img id="destop" src="{{ project.image_banner.url }}">
+<div class="row">
+    <div class="col-xs-12">
+        <nav class="navbar navbar-inverse ">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          {% if user.is_authenticated%}
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="">Quản lý</a></li>
+            <li class="active"><a href="">Bản đồ</a></li>
+          </ul>
+             <form class="navbar-form navbar-right" action="">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Tìm kiếm trạm">
+                </div>
+                <button type="submit" class="btn btn-default">Search</button>
+             </form>
+           {% endif %}
+        </div>
+        </nav>
+    </div>
+</div>
+
+<div class="row">
+     <div class="container-fluid">
+         {% for station in stations %}
+        <div class="col-xs-12">
+            <div class="panel panel-primary ">
+                 <div class="panel-heading">
+                     <div class="row">
+                         <div class="col-xs-6 " >
+                             <a href="/station/{{ station.pk }}/giam-sat" class="station" style="color:white">{{ station.display_name}}</a>
+                         </div>
+                         <div class="col-xs-6 text-right">
+                            <i class="fa fa-plug" style="color:#ffffff;"></i>
+                            <i class="fa fa-battery-full" style="color:#ffffff;"></i>
+                            <i class="fa fa-signal" style="color:#ffffff;"> 30</i>
+                            <i class="fa fa-signal" style="color:red;"> 30</i>
+                         </div>
+                     </div>
+                 </div>
+                 <div id="" class="panel-body">
+                     <div class="row">
+                     {% for station_config in station.stationconfig_set.all %}
+                     <div class="col-xs-4">
+                        <div class="name">{{ station_config.display_name }}</div>
+                        <div class="value">{{ station_config.stationconfigvalue_set.first.value }} {{ station_config.unit }}</div>
+                      </div>
+                     {% endfor %}
+                      </br>
+                      <div class="col-xs-12">
+                          <span class="glyphicon glyphicon-time text-primary" > 12:34 06/11/2018</span>
+                      </div>
+                      </div>
+                 </div>
+            </div>
+        </div>
+         {% endfor %}
+    </div>
+</div>
+<div class="footer">&copy; Bản quyền thuộc về
+    <a  href="{{ project.web_company }}" target="_blank">
+        {{ project.company_name }}
+    </a>
+</div>
+<script type="application/javascript">
+  $('a.station').click(function () {
+    var id  = $(this).data('id');
+    <!--console.log(id);-->
+    $.ajax('ajax_station_detail/' + id).done(function (data) {
+      $('#id_station_detail').html(data);
+      <!--console.log(data);-->
+    })
+  });
+</script>
+</body>
+</html>
+

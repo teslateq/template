@@ -1,0 +1,85 @@
+{%  extends 'base.html' %}
+{% block head %}
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+{% endblock head %}
+{% block content %}
+
+<div class="row">
+  <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+    <div class="panel panel-primary ">
+        <div class="panel-heading">Bảng điều khiển {{stations.display_name}}</div>
+        <div class="panel-body ">
+              <table class="table text-center">
+                 <thead>
+                    <tr>
+                      <th class="text-center">Tên</th>
+                      <th class="text-center">Điều khiển</th>
+                      <th class="text-center">Giá trị</th>
+                      <th class="text-center">Phản hồi</th>
+                    </tr>
+                  </thead>
+                <tbody>
+                  <tr>
+                    <td>Relay 1</td>
+                    <td><input id="dk1" type="checkbox" checked data-toggle="toggle" data-size="large"></td>
+                    <td><div id="r1">--</div></td>
+                    <td><div id="s1">--</div></td>
+                  </tr>
+                  <tr>
+                    <td>Relay 2</td>
+                    <td><input id="dk2" type="checkbox" checked data-toggle="toggle" data-size="large"></td>
+                    <td><div id="r2">--</div></td>
+                    <td><div id="s2">--</div></td>
+                  </tr>
+
+                </tbody>
+              </table>
+        </div>
+    </div>
+  </div>
+</div>
+
+<script type="application/javascript">
+$(function() {
+    $("input[type='checkbox']").change(function(event) {
+    	console.log(this.id+$(this).val()+$(this).prop('checked'));
+    	$("#"+this.id+"val").html($(this).prop('checked'));
+        $.ajax({
+            type : 'GET',
+            url  : '/sim/control',
+            data : {
+                dk:	this.id,
+                val: $(this).prop('checked'),
+                id: {{stations.id}}
+            }
+        });
+    });
+
+    setInterval(
+        function getdata() {
+        $.getJSON( "/sim/api/control/{{stations.id}}/", function( data ) {
+            console.log(data);
+            if(data.r1 == 1)
+                $("#r1").html('<i class="fa fa-check fa-2x" style="color:green"></i>');
+            if(data.r1 == 0)
+                $("#r1").html('<i class="fa fa-times fa-2x"></i>');
+            if(data.r2 == 1)
+                $("#r2").html('<i class="fa fa-check fa-2x" style="color:green"></i>');
+            if(data.r2 == 0)
+                $("#r2").html('<i class="fa fa-times fa-2x"></i>');
+
+            if(data.s1 == 1)
+                $("#s1").html('<i class="fa fa-check fa-2x" style="color:green"></i>');
+            if(data.s1 == 0)
+                $("#s1").html('<i class="fa fa-times fa-2x"></i>');
+            if(data.s2 == 1)
+                $("#s2").html('<i class="fa fa-check fa-2x" style="color:green"></i>');
+            if(data.s2 == 0)
+                $("#s2").html('<i class="fa fa-times fa-2x"></i>');
+        });
+    },1000);
+})
+</script>
+{% endblock content %}
+

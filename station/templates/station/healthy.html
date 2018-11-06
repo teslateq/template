@@ -1,0 +1,366 @@
+{%  extends 'base.html' %}
+{% block head %}
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" />
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css" />
+{% endblock head %}
+{% block content %}
+<style type="text/css">
+
+</style>
+<div class="row">
+  {% for station in stations.stationhealthy_set.all %}
+  <div class="col-sm-6 ">
+    <div class="panel panel-primary ">
+        <div class="panel-heading">{{station.display_name}} (4.4 - 6.5) {{station.unit}} {{station.station}}</div>
+        <div id="{{station.id}}" class="panel-body tbl1" style="">30 °C</div>
+        <div>12:12 12/12/2012</div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<div class="row">
+   <div class="col-sm-12">
+    <div class="panel panel-primary ">
+        <div class="panel-heading">
+            Bảng giao liên {{stations.display_name}} </br>
+            <input type="datetime-local" value="2018-06-12T19:30"
+               min="2018-06-07T00:00" max="2019-06-14T00:00" style="color:#000" />
+        </div>
+        <div class="panel-body">
+            <table class="table table-hover text-center">
+                 <thead>
+                    <tr>
+                      <th class="text-center"></th>
+                      <th class="text-center">CNE < 20</th>
+                      <th class="text-center">Ngày giờ</th>
+                    </tr>
+                  </thead>
+                <tbody>
+                  <tr class="info">
+                    <td>Present</td>
+                    <td>93</td>
+                    <td>21:15:34 10/12/2018</td>
+                  </tr>
+                  <tr>
+                     <td>Max</td>
+                    <td>96</td>
+                    <td>12:50:54 10/12/2018</td>
+                  </tr>
+                <tr  class="info">
+                    <td>Min</td>
+                    <td>56</td>
+                    <td>09:10:32 10/12/2018</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+  </div>
+   <div class="col-sm-12">
+    <div class="panel panel-primary ">
+        <div class="panel-heading">Bảng daily reset {{stations.display_name}}</div>
+        <div class="panel-body">
+            <table class="table table-hover text-center">
+                 <thead>
+                    <tr>
+                       <th class="text-center">DR</th>
+                      <th class="text-center">Ngày giờ</th>
+                    </tr>
+                  </thead>
+                <tbody>
+                  <tr class="info">
+                    <td>1</td>
+                    <td>09:10:32 10/12/2018</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+  </div>
+   <div class="col-sm-12">
+    <div class="panel panel-primary ">
+        <div class="panel-heading">Thiết bị iteslateq {{stations.display_name}}</div>
+        <div class="panel-body">
+            <table class="table table-hover text-center">
+                 <thead>
+                    <tr>
+                      <th class="text-center">Số điện thoại</th>
+                      <th class="text-center">Ngày kích hoạt</th>
+                    </tr>
+                  </thead>
+                <tbody>
+                  <tr class="info">
+                    <td>077234565</td>
+                    <td>22/05/2018</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+  </div>
+</div>
+<script type="application/javascript">
+<!--var gaugeOptions = {-->
+
+    <!--chart: {-->
+        <!--type: 'solidgauge'-->
+    <!--},-->
+
+    <!--title: null,-->
+
+    <!--pane: {-->
+        <!--center: ['50%', '88%'],-->
+        <!--size: '170%',-->
+        <!--startAngle: -90,-->
+        <!--endAngle: 90,-->
+        <!--background: {-->
+            <!--backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || '#EEE',-->
+            <!--innerRadius: '60%',-->
+            <!--outerRadius: '100%',-->
+            <!--shape: 'arc'-->
+        <!--}-->
+    <!--},-->
+
+    <!--tooltip: {-->
+        <!--enabled: false-->
+    <!--},-->
+
+    <!--// the value axis-->
+    <!--yAxis: {-->
+        <!--stops: [-->
+            <!--[0.1, '#55BF3B'], // green-->
+            <!--[0.5, '#DDDF0D'], // yellow-->
+            <!--[0.9, '#DF5353'] // red-->
+        <!--],-->
+        <!--lineWidth: 0,-->
+        <!--minorTickInterval: null,-->
+        <!--tickAmount: 2,-->
+        <!--title: {-->
+            <!--y: 25-->
+        <!--},-->
+        <!--labels: {-->
+            <!--y: 16-->
+        <!--}-->
+    <!--},-->
+
+    <!--plotOptions: {-->
+        <!--solidgauge: {-->
+            <!--dataLabels: {-->
+                <!--y: 25,-->
+                <!--borderWidth: 0,-->
+                <!--useHTML: true-->
+            <!--}-->
+        <!--}-->
+    <!--}-->
+<!--};-->
+
+<!--// The speed gauge-->
+<!--var chartSpeed = Highcharts.chart('container-speed', Highcharts.merge(gaugeOptions, {-->
+    <!--yAxis: {-->
+        <!--min: 0,-->
+        <!--max: 200,-->
+        <!--title: {-->
+            <!--text: 'Speed',-->
+             <!--style: {-->
+                <!--fontSize: '17px', // của text:Nhiệt độ-->
+                <!--// fontWeight: 'bold',-->
+                <!--color:'#000'-->
+             <!--}-->
+        <!--}-->
+    <!--},-->
+
+    <!--credits: {-->
+        <!--enabled: false-->
+    <!--},-->
+
+    <!--series: [{-->
+        <!--name: 'Speed',-->
+        <!--data: [80],-->
+        <!--dataLabels: {-->
+            <!--format: '<div style="text-align:center"><span style="font-size:25px;color:' +-->
+                <!--((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +-->
+                   <!--'<span style="font-size:12px;color:silver">km/h</span></div>'-->
+        <!--},-->
+        <!--tooltip: {-->
+            <!--valueSuffix: ' km/h'-->
+        <!--}-->
+    <!--}]-->
+
+<!--}));-->
+
+<!--// Bring life to the dials-->
+<!--setInterval(function () {-->
+    <!--// Speed-->
+    <!--var point,-->
+        <!--newVal,-->
+        <!--inc;-->
+
+    <!--if (chartSpeed) {-->
+        <!--point = chartSpeed.series[0].points[0];-->
+        <!--inc = Math.round((Math.random() - 0.5) * 100);-->
+        <!--newVal = point.y + inc;-->
+
+        <!--if (newVal < 0 || newVal > 200) {-->
+            <!--newVal = point.y - inc;-->
+        <!--}-->
+
+        <!--point.update(newVal);-->
+    <!--}-->
+<!--}, 2000);-->
+
+
+<!--$.getJSON('https://cdn.rawgit.com/highcharts/highcharts/057b672172ccc6c08fe7dbb27fc17ebca3f5b770/samples/data/usdeur.json', function (data) {-->
+
+    <!--// Create the chart-->
+    <!--Highcharts.stockChart('stock', {-->
+
+
+        <!--rangeSelector: {-->
+            <!--selected: 0-->
+        <!--},-->
+
+        <!--title: {-->
+            <!--text: 'USD to EUR exchange rate'-->
+        <!--},-->
+
+        <!--tooltip: {-->
+            <!--style: {-->
+                <!--width: '200px'-->
+            <!--},-->
+            <!--valueDecimals: 4,-->
+            <!--shared: true-->
+        <!--},-->
+
+        <!--yAxis: {-->
+            <!--title: {-->
+                <!--text: 'Exchange rate'-->
+            <!--}-->
+        <!--},-->
+
+        <!--series: [{-->
+            <!--name: 'USD to EUR',-->
+            <!--data: data,-->
+            <!--id: 'dataseries'-->
+
+        <!--// the event marker flags-->
+        <!--}, {-->
+            <!--type: 'flags',-->
+            <!--data: [{-->
+                <!--x: Date.UTC(2015, 5, 8),-->
+                <!--title: 'C',-->
+                <!--text: 'Stocks fall on Greece, rate concerns; US dollar dips'-->
+            <!--}, {-->
+                <!--x: Date.UTC(2015, 5, 12),-->
+                <!--title: 'D',-->
+                <!--text: 'Zimbabwe ditches \'worthless\' currency for the US dollar '-->
+            <!--}, {-->
+                <!--x: Date.UTC(2015, 5, 19),-->
+                <!--title: 'E',-->
+                <!--text: 'US Dollar Declines Over the Week on Rate Timeline'-->
+            <!--}, {-->
+                <!--x: Date.UTC(2015, 5, 26),-->
+                <!--title: 'F',-->
+                <!--text: 'Greek Negotiations Take Sharp Turn for Worse, US Dollar set to Rally '-->
+            <!--}, {-->
+                <!--x: Date.UTC(2015, 5, 29),-->
+                <!--title: 'G',-->
+                <!--text: 'Euro records stunning reversal against dollar'-->
+            <!--}, {-->
+                <!--x: Date.UTC(2015, 5, 30),-->
+                <!--title: 'H',-->
+                <!--text: 'Surging US dollar curbs global IT spend'-->
+            <!--}],-->
+            <!--onSeries: 'dataseries',-->
+            <!--shape: 'circlepin',-->
+            <!--width: 16-->
+        <!--}]-->
+    <!--});-->
+<!--});-->
+
+
+
+$.getJSON('https://cdn.rawgit.com/highcharts/highcharts/057b672172ccc6c08fe7dbb27fc17ebca3f5b770/samples/data/usdeur.json', function (data) {
+
+    // Create the chart
+    Highcharts.stockChart('container', {
+
+
+        rangeSelector: {
+            selected: 0
+        },
+
+        title: {
+            text: 'USD to EUR exchange rate'
+        },
+
+        tooltip: {
+            style: {
+                width: '200px'
+            },
+            valueDecimals: 4,
+            shared: true
+        },
+
+        yAxis: {
+            title: {
+                text: 'Exchange rate'
+            }
+        },
+
+        series: [{
+            name: 'USD to EUR',
+            data: data,
+            id: 'dataseries'
+
+        // the event marker flags
+        }, {
+            type: 'flags',
+            data: [{
+                x: Date.UTC(2015, 5, 8),
+                title: 'C',
+                text: 'Stocks fall on Greece, rate concerns; US dollar dips'
+            }, {
+                x: Date.UTC(2015, 5, 12),
+                title: 'D',
+                text: 'Zimbabwe ditches \'worthless\' currency for the US dollar '
+            }, {
+                x: Date.UTC(2015, 5, 19),
+                title: 'E',
+                text: 'US Dollar Declines Over the Week on Rate Timeline'
+            }, {
+                x: Date.UTC(2015, 5, 26),
+                title: 'F',
+                text: 'Greek Negotiations Take Sharp Turn for Worse, US Dollar set to Rally '
+            }, {
+                x: Date.UTC(2015, 5, 29),
+                title: 'G',
+                text: 'Euro records stunning reversal against dollar'
+            }, {
+                x: Date.UTC(2015, 5, 30),
+                title: 'H',
+                text: 'Surging US dollar curbs global IT spend'
+            }],
+            onSeries: 'dataseries',
+            shape: 'circlepin',
+            width: 16
+        }]
+    });
+});
+    <!--setInterval(-->
+        <!--function getdata() {-->
+        <!--$.ajax({-->
+            <!--type : 'GET',-->
+            <!--url  : '/api/tram',-->
+            <!--dataType:'json',-->
+            <!--success : function(json){-->
+                <!--console.log(json);-->
+                <!--$.each(json, function(idx, obj) {-->
+                    <!--$("#"+obj.station_config).text(obj.value);-->
+                <!--});-->
+            <!--}-->
+        <!--});-->
+<!--},2500);-->
+</script>
+{% endblock content %}

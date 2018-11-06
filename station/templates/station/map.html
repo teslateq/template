@@ -1,0 +1,154 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="icon" type="image/png" href=" {{ project.logo_company.url }}" >
+    <title>{{ project.name_project }}</title>
+    <style>
+        html, body {
+        height: 100%;
+        margin: 0 ;
+        padding: 0;
+        }
+        .container, .container > div, .container > div #map-canvas {
+            height: inherit;
+            margin-bottom:15px;
+        }
+        img {
+            height: auto;
+            /* Make sure images are scaled correctly. */
+            max-width: 100%;
+            /* Adhere to container width. */
+            vertical-align: middle;
+        }
+
+        .navbar{
+            border: none;
+            border-radius:0;
+            background:#FCCD0E;font-weight: bold;
+        }
+        #myNavbar ul li a{
+            background:#FCCD0E;
+            color:#000;
+        }
+        #myNavbar ul li a:hover {
+            background: #fff;
+        }
+    </style>
+</head>
+<body style="font-size: 17px;">
+ <div class="container-fluid "  style="background:#000000;">
+        {% if user.is_authenticated%}
+        <div style="text-align:right;margin:10px;">
+            <a href="{% url 'accounts:profile_view' %}" style="color:#ffffff;">
+                <span class="glyphicon glyphicon-user"></span> {{ user }}</a>
+            <a href="{% url 'accounts:logout' %}" style="color:#ffffff;">
+               <span class="glyphicon glyphicon-log-in"></span> Logout</a>
+            <i class="fa fa-plug" style="color:#ffffff;"></i>
+            <i class="fa fa-battery-full" style="color:#ffffff;"></i>
+            <i class="fa fa-signal" style="color:#ffffff;"> 30</i>
+            <i class="fa fa-signal" style="color:red;"> 30</i>
+        </div>
+        {% endif %}
+    </div>
+<img id="destop" src="{% static '/images/banner_teslateq.png' %}">
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <nav class="navbar navbar-inverse ">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          {% if user.is_authenticated%}
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="{% url 'station:giam-sat' pk %}">Giám sát</a></li>
+            <li class="active"><a href="{% url 'station:bao-cao' pk %}">Báo cáo</a></li>
+            <li class="active"><a href="{% url 'station:dieu-khien' pk %}">Điều khiển</a></li>
+            <li class="active"><a href="{% url 'station:ban-do' pk %}">Bản đồ</a></li>
+            <li class="active"><a href="{% url 'station:canh-bao' pk %}">Cảnh báo</a></li>
+            <li class="active"><a href="{% url 'station:modbus' pk %}">Modbus</a></li>
+            <li class="active"><a href="{% url 'station:parameter' pk %}">Parameter</a></li>
+            <li class="active"><a href="{% url 'station:suc-khoe' pk %}">Sức khỏe</a></li>
+          </ul>
+           {% endif %}
+        </div>
+        </nav>
+    </div>
+</div>
+
+    <div class="container ">
+      <div>
+        <div id="map-canvas"></div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+function initMap() {
+  var myLatLng = {lat: 10.8253347, lng: 106.7186095};
+
+  var map = new google.maps.Map(document.getElementById('map-canvas'), {
+    zoom: 15,
+    center: myLatLng,
+    scrollwheel:true,
+  });
+
+  var marker = new google.maps.Marker({
+    position: myLatLng,
+    map: map,
+    <!--draggable:true,-->
+  });
+
+  var contentString = '<div><b class="zxc">Loading</b></br></div>';
+  var infowindow = new google.maps.InfoWindow({
+      content: contentString
+  });
+  infowindow.open(map, marker);
+
+  var marker_1 = new google.maps.Marker({
+      position:{'lat':10.8253347 ,'lng':106.7186095},
+      label:'A',
+      map:map,
+  });
+
+  var info = new google.maps.InfoWindow();
+  google.maps.event.addListener(marker_1,'click',function() {
+      infowindow.close();
+      var content_info = '<div style="text-align: center"><h6 style="margin:10px">Tram 1</h6><b class="zxc" >Loading</b></div>';
+      info.setContent(content_info);
+      info.open(map,marker_1);
+  });
+
+  google.maps.event.addListener(map,'click',function() {
+      info.close();
+      infowindow.open(map, marker);
+  }) ;
+}
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJLr0e4x01WLsxZLyzW5XgqqnD7wRnSSI&libraries=places&callback=initMap">
+    </script>
+    <!--</div>-->
+<!--</div>-->
+    <div class="footer" style="  right: 0;bottom: 0;left: 0;padding: 1rem;color: #ffffff;
+    text-align: center; background:#0B0A0A;">
+        <a  href="{{ project.web_company }}" target="_blank">
+            {{ project.company_name }}
+        </a>
+    </div>
+</body>
+</html>
+
+
