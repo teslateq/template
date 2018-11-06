@@ -1,0 +1,67 @@
+{%  extends 'base.html' %}
+{% block content %}
+
+<div class="row">
+  <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+    <div class="panel panel-primary ">
+        <div class="panel-heading">
+           Danh sách tài khoản {{stations.display_name}}
+        </div>
+        <div class="panel-body ">
+             <div class="table-responsive-sm">
+                <table class="table table-hover table-sm">
+                    <thead>
+                      <tr>
+                          <th style="text-align: center;">STT</th>
+                          <th style="text-align: center;">Name</th>
+                          <th style="text-align: center;">Phân quyền</th>
+                          <th style="text-align: center;">Edit</th>
+                          <th style="text-align: center;">Delete</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr  class="info">
+                            <td>1</td>
+                            <td>abc</td>
+                            <td>Kỹ thuật</td>
+                            <td><i class="fa fa-edit"></i></td>
+                            <td><i class="fa fa-trash"></i></td>
+                        </tr>
+                         <tr>
+                            <td>2</td>
+                            <td>xyz</td>
+                            <td>Quản lý</td>
+                            <td><i class="fa fa-edit"></i></td>
+                            <td><i class="fa fa-trash"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+              <div class="form-group row">
+                    <div class="text-center">
+                      <a class="btn btn-success" href="{% url 'station:create' pk %}" role="button">Tạo tài khoản</a>
+                    </div>
+                </div>
+        </div>
+    </div>
+  </div>
+    <div class=" row">
+      <div class="col-xs-6">
+          <a class="btn btn-info" href="{% url 'station:group' pk %}" role="button">Tạo phân quyền</a>
+    </div>
+        <div class="col-xs-6">
+          <a class="btn btn-primary" href="{% url 'station:group-list' pk %}" role="button">List group</a>
+    </div>
+ </div>
+</div>
+<script type="application/javascript">
+
+</script>
+{% endblock content %}
+
+
+
+
+
+
+

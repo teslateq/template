@@ -2,7 +2,8 @@ from django.urls import path
 from station.views import (
     StationView, ControlView, ReportView,
     MapView,HealthyView,AlarmView,
-    ParameterView, ModbusView
+    ParameterView, ModbusView,AccountView,
+    GroupView,CreateView,GroupListView,
 )
     # , ControlView, StationView ,ReportView
 # from station.views.station_view import StationView
@@ -20,4 +21,8 @@ urlpatterns = [
     path('<int:pk>/canh-bao/',AlarmView.as_view(),name ='canh-bao'),
     path('<int:pk>/parameter/',ParameterView.as_view(),name ='parameter'),
     path('<int:pk>/modbus/', ModbusView.as_view(),name ='modbus'),
+    path('<int:pk>/account/', AccountView.as_view(),name ='tai-khoan'),
+    path('<int:pk>/account/group/', GroupView.as_view(),name ='group'),
+    path('<int:pk>/account/group/list', GroupListView.as_view(),name ='group-list'),
+    path('<int:pk>/account/create/', CreateView.as_view(),name ='create'),
 ]

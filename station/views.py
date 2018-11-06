@@ -25,12 +25,7 @@ class HealthyView(TemplateView):
     template_name = 'station/healthy.html'
     def get_context_data(self, **kwargs):
         context = super(HealthyView, self).get_context_data(**kwargs)
-        self.request.session['id_station'] = kwargs['pk']
-        tes = self.request.session.get('id_station')
-        if Station.objects.filter(pk = tes).exists():
-            context['stations'] = Station.objects.get(pk = kwargs['pk'])
-        else:
-            context['err'] = "k ton tai"
+        context['stations'] = Station.objects.get(pk = kwargs['pk'])
         p = Project.objects.all()
         context['project'] = p[0]
         return context
@@ -58,7 +53,6 @@ class ReportView(LoginRequiredMixin,TemplateView):
     def get_context_data(self, **kwargs):
         context = super(ReportView, self).get_context_data(**kwargs)
         context['stations'] = Station.objects.get(pk = kwargs['pk'])
-        context['station']  = Station.objects.get(pk = kwargs['pk'])
         p = Project.objects.all()
         context['project'] = p[0]
         return context
@@ -93,12 +87,7 @@ class AlarmView(TemplateView):
     template_name = 'station/alarm.html'
     def get_context_data(self, **kwargs):
         context = super(AlarmView, self).get_context_data(**kwargs)
-        self.request.session['id_station'] = kwargs['pk']
-        tes = self.request.session.get('id_station')
-        if Station.objects.filter(pk = tes).exists():
-            context['stations'] = Station.objects.get(pk = kwargs['pk'])
-        else:
-            context['err'] = "k ton tai"
+        context['station']  = Station.objects.get(pk = kwargs['pk'])
         p = Project.objects.all()
         context['project'] = p[0]
         return context
@@ -107,12 +96,7 @@ class ParameterView(TemplateView):
     template_name = 'station/parameter.html'
     def get_context_data(self, **kwargs):
         context = super(ParameterView, self).get_context_data(**kwargs)
-        self.request.session['id_station'] = kwargs['pk']
-        tes = self.request.session.get('id_station')
-        if Station.objects.filter(pk = tes).exists():
-            context['stations'] = Station.objects.get(pk = kwargs['pk'])
-        else:
-            context['err'] = "k ton tai"
+        context['station']  = Station.objects.get(pk = kwargs['pk'])
         p = Project.objects.all()
         context['project'] = p[0]
         return context
@@ -121,15 +105,43 @@ class ModbusView(TemplateView):
     template_name = 'station/modbus.html'
     def get_context_data(self, **kwargs):
         context = super(ModbusView, self).get_context_data(**kwargs)
-        self.request.session['id_station'] = kwargs['pk']
-        tes = self.request.session.get('id_station')
-        if Station.objects.filter(pk = tes).exists():
-            context['stations'] = Station.objects.get(pk = kwargs['pk'])
-        else:
-            context['err'] = "k ton tai"
+        context['station']  = Station.objects.get(pk = kwargs['pk'])
         p = Project.objects.all()
         context['project'] = p[0]
         return context
 
-# class StationView(TemplateView):
-#     template_name = 'station/station.html'
+class AccountView(TemplateView):
+    template_name = 'station/account.html'
+    def get_context_data(self, **kwargs):
+        context = super(AccountView, self).get_context_data(**kwargs)
+        context['station']  = Station.objects.get(pk = kwargs['pk'])
+        p = Project.objects.all()
+        context['project'] = p[0]
+        return context
+
+class GroupView(TemplateView):
+    template_name = 'station/group.html'
+    def get_context_data(self, **kwargs):
+        context = super(GroupView, self).get_context_data(**kwargs)
+        context['station']  = Station.objects.get(pk = kwargs['pk'])
+        p = Project.objects.all()
+        context['project'] = p[0]
+        return context
+
+class GroupListView(TemplateView):
+    template_name = 'station/list-group.html'
+    def get_context_data(self, **kwargs):
+        context = super(GroupListView, self).get_context_data(**kwargs)
+        context['station']  = Station.objects.get(pk = kwargs['pk'])
+        p = Project.objects.all()
+        context['project'] = p[0]
+        return context
+
+class CreateView(TemplateView):
+    template_name = 'station/create.html'
+    def get_context_data(self, **kwargs):
+        context = super(CreateView, self).get_context_data(**kwargs)
+        context['station']  = Station.objects.get(pk = kwargs['pk'])
+        p = Project.objects.all()
+        context['project'] = p[0]
+        return context

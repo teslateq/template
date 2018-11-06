@@ -1,0 +1,67 @@
+{%  extends 'base.html' %}
+{% block content %}
+
+<div class="row">
+  <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+    <div class="panel panel-primary ">
+        <div class="panel-heading">
+           List group {{stations.display_name}}
+        </div>
+        <div class="panel-body ">
+             <div class="table-responsive-sm">
+                <table class="table table-hover table-sm">
+                    <thead>
+                      <tr>
+                          <th style="text-align: center;">Group</th>
+                          <th style="text-align: center;">Quyền truy cập</th>
+                          <th style="text-align: center;">Edit</th>
+                          <th style="text-align: center;">Delete</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr  class="info">
+                            <td>Kỹ thuât</td>
+                            <td>
+                                <select class="custom-select">
+                                  <option value="1">Giám sát</option>
+                                  <option value="2">Điều khiển</option>
+                                  <option value="1">Modbus</option>
+                                  <option value="2">Parameter</option>
+                                  <option value="3">Bản đồ</option>
+                                </select>
+                            </td>
+                            <td><i class="fa fa-edit"></i></td>
+                            <td><i class="fa fa-trash"></i></td>
+                        </tr>
+                         <tr>
+                            <td>Quản lý</td>
+                            <td>
+                                  <select class="custom-select">
+                                  <option value="1">Giám sát</option>
+                                  <option value="2">Báo cáo</option>
+                                  <option value="1">Modbus</option>
+                                  <option value="2">Parameter</option>
+                                  <option value="3">Tài khoản</option>
+                                </select>
+                            </td>
+                            <td><i class="fa fa-edit"></i></td>
+                            <td><i class="fa fa-trash"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+<script type="application/javascript">
+
+</script>
+{% endblock content %}
+
+
+
+
+
+
+
