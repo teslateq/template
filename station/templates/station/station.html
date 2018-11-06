@@ -128,7 +128,12 @@
   </div>
   <div class="col-sm-12">
     <div class="panel panel-primary ">
-        <div class="panel-heading">Biểu đồ theo thời gian {{stations.display_name}}</div>
+        <div class="panel-heading">Biểu đồ theo thời gian {{stations.display_name}}
+            Bắt đầu:
+            <input id="" type="date" style="color:#000"  required>
+            Kết thúc:
+            <input id="" type="date" style="color:#000"  required>
+        </div>
         <div class="panel-body">
             <div id="container" style="height: 400px; min-width: 310px"></div>
         </div>
@@ -136,265 +141,71 @@
   </div>
 </div>
 <script type="application/javascript">
-<!--var gaugeOptions = {-->
 
-    <!--chart: {-->
-        <!--type: 'solidgauge'-->
-    <!--},-->
+var seriesOptions = [],
+    seriesCounter = 0,
+    names = ['MSFT', 'AAPL', 'GOOG'];
 
-    <!--title: null,-->
+/**
+ * Create the chart when all data is loaded
+ * @returns {undefined}
+ */
+function createChart() {
 
-    <!--pane: {-->
-        <!--center: ['50%', '88%'],-->
-        <!--size: '170%',-->
-        <!--startAngle: -90,-->
-        <!--endAngle: 90,-->
-        <!--background: {-->
-            <!--backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || '#EEE',-->
-            <!--innerRadius: '60%',-->
-            <!--outerRadius: '100%',-->
-            <!--shape: 'arc'-->
-        <!--}-->
-    <!--},-->
-
-    <!--tooltip: {-->
-        <!--enabled: false-->
-    <!--},-->
-
-    <!--// the value axis-->
-    <!--yAxis: {-->
-        <!--stops: [-->
-            <!--[0.1, '#55BF3B'], // green-->
-            <!--[0.5, '#DDDF0D'], // yellow-->
-            <!--[0.9, '#DF5353'] // red-->
-        <!--],-->
-        <!--lineWidth: 0,-->
-        <!--minorTickInterval: null,-->
-        <!--tickAmount: 2,-->
-        <!--title: {-->
-            <!--y: 25-->
-        <!--},-->
-        <!--labels: {-->
-            <!--y: 16-->
-        <!--}-->
-    <!--},-->
-
-    <!--plotOptions: {-->
-        <!--solidgauge: {-->
-            <!--dataLabels: {-->
-                <!--y: 25,-->
-                <!--borderWidth: 0,-->
-                <!--useHTML: true-->
-            <!--}-->
-        <!--}-->
-    <!--}-->
-<!--};-->
-
-<!--// The speed gauge-->
-<!--var chartSpeed = Highcharts.chart('container-speed', Highcharts.merge(gaugeOptions, {-->
-    <!--yAxis: {-->
-        <!--min: 0,-->
-        <!--max: 200,-->
-        <!--title: {-->
-            <!--text: 'Speed',-->
-             <!--style: {-->
-                <!--fontSize: '17px', // của text:Nhiệt độ-->
-                <!--// fontWeight: 'bold',-->
-                <!--color:'#000'-->
-             <!--}-->
-        <!--}-->
-    <!--},-->
-
-    <!--credits: {-->
-        <!--enabled: false-->
-    <!--},-->
-
-    <!--series: [{-->
-        <!--name: 'Speed',-->
-        <!--data: [80],-->
-        <!--dataLabels: {-->
-            <!--format: '<div style="text-align:center"><span style="font-size:25px;color:' +-->
-                <!--((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +-->
-                   <!--'<span style="font-size:12px;color:silver">km/h</span></div>'-->
-        <!--},-->
-        <!--tooltip: {-->
-            <!--valueSuffix: ' km/h'-->
-        <!--}-->
-    <!--}]-->
-
-<!--}));-->
-
-<!--// Bring life to the dials-->
-<!--setInterval(function () {-->
-    <!--// Speed-->
-    <!--var point,-->
-        <!--newVal,-->
-        <!--inc;-->
-
-    <!--if (chartSpeed) {-->
-        <!--point = chartSpeed.series[0].points[0];-->
-        <!--inc = Math.round((Math.random() - 0.5) * 100);-->
-        <!--newVal = point.y + inc;-->
-
-        <!--if (newVal < 0 || newVal > 200) {-->
-            <!--newVal = point.y - inc;-->
-        <!--}-->
-
-        <!--point.update(newVal);-->
-    <!--}-->
-<!--}, 2000);-->
-
-
-<!--$.getJSON('https://cdn.rawgit.com/highcharts/highcharts/057b672172ccc6c08fe7dbb27fc17ebca3f5b770/samples/data/usdeur.json', function (data) {-->
-
-    <!--// Create the chart-->
-    <!--Highcharts.stockChart('stock', {-->
-
-
-        <!--rangeSelector: {-->
-            <!--selected: 0-->
-        <!--},-->
-
-        <!--title: {-->
-            <!--text: 'USD to EUR exchange rate'-->
-        <!--},-->
-
-        <!--tooltip: {-->
-            <!--style: {-->
-                <!--width: '200px'-->
-            <!--},-->
-            <!--valueDecimals: 4,-->
-            <!--shared: true-->
-        <!--},-->
-
-        <!--yAxis: {-->
-            <!--title: {-->
-                <!--text: 'Exchange rate'-->
-            <!--}-->
-        <!--},-->
-
-        <!--series: [{-->
-            <!--name: 'USD to EUR',-->
-            <!--data: data,-->
-            <!--id: 'dataseries'-->
-
-        <!--// the event marker flags-->
-        <!--}, {-->
-            <!--type: 'flags',-->
-            <!--data: [{-->
-                <!--x: Date.UTC(2015, 5, 8),-->
-                <!--title: 'C',-->
-                <!--text: 'Stocks fall on Greece, rate concerns; US dollar dips'-->
-            <!--}, {-->
-                <!--x: Date.UTC(2015, 5, 12),-->
-                <!--title: 'D',-->
-                <!--text: 'Zimbabwe ditches \'worthless\' currency for the US dollar '-->
-            <!--}, {-->
-                <!--x: Date.UTC(2015, 5, 19),-->
-                <!--title: 'E',-->
-                <!--text: 'US Dollar Declines Over the Week on Rate Timeline'-->
-            <!--}, {-->
-                <!--x: Date.UTC(2015, 5, 26),-->
-                <!--title: 'F',-->
-                <!--text: 'Greek Negotiations Take Sharp Turn for Worse, US Dollar set to Rally '-->
-            <!--}, {-->
-                <!--x: Date.UTC(2015, 5, 29),-->
-                <!--title: 'G',-->
-                <!--text: 'Euro records stunning reversal against dollar'-->
-            <!--}, {-->
-                <!--x: Date.UTC(2015, 5, 30),-->
-                <!--title: 'H',-->
-                <!--text: 'Surging US dollar curbs global IT spend'-->
-            <!--}],-->
-            <!--onSeries: 'dataseries',-->
-            <!--shape: 'circlepin',-->
-            <!--width: 16-->
-        <!--}]-->
-    <!--});-->
-<!--});-->
-
-
-
-$.getJSON('https://cdn.rawgit.com/highcharts/highcharts/057b672172ccc6c08fe7dbb27fc17ebca3f5b770/samples/data/usdeur.json', function (data) {
-
-    // Create the chart
     Highcharts.stockChart('container', {
 
-
         rangeSelector: {
-            selected: 0
-        },
-
-        title: {
-            text: 'USD to EUR exchange rate'
-        },
-
-        tooltip: {
-            style: {
-                width: '200px'
-            },
-            valueDecimals: 4,
-            shared: true
+            selected: 4
         },
 
         yAxis: {
-            title: {
-                text: 'Exchange rate'
+            labels: {
+                formatter: function () {
+                    return (this.value > 0 ? ' + ' : '') + this.value + '%';
+                }
+            },
+            plotLines: [{
+                value: 0,
+                width: 2,
+                color: 'silver'
+            }]
+        },
+
+        plotOptions: {
+            series: {
+                compare: 'percent',
+                showInNavigator: true
             }
         },
 
-        series: [{
-            name: 'USD to EUR',
-            data: data,
-            id: 'dataseries'
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.change}%)<br/>',
+            valueDecimals: 2,
+            split: true
+        },
 
-        // the event marker flags
-        }, {
-            type: 'flags',
-            data: [{
-                x: Date.UTC(2015, 5, 8),
-                title: 'C',
-                text: 'Stocks fall on Greece, rate concerns; US dollar dips'
-            }, {
-                x: Date.UTC(2015, 5, 12),
-                title: 'D',
-                text: 'Zimbabwe ditches \'worthless\' currency for the US dollar '
-            }, {
-                x: Date.UTC(2015, 5, 19),
-                title: 'E',
-                text: 'US Dollar Declines Over the Week on Rate Timeline'
-            }, {
-                x: Date.UTC(2015, 5, 26),
-                title: 'F',
-                text: 'Greek Negotiations Take Sharp Turn for Worse, US Dollar set to Rally '
-            }, {
-                x: Date.UTC(2015, 5, 29),
-                title: 'G',
-                text: 'Euro records stunning reversal against dollar'
-            }, {
-                x: Date.UTC(2015, 5, 30),
-                title: 'H',
-                text: 'Surging US dollar curbs global IT spend'
-            }],
-            onSeries: 'dataseries',
-            shape: 'circlepin',
-            width: 16
-        }]
+        series: seriesOptions
+    });
+}
+
+$.each(names, function (i, name) {
+
+    $.getJSON('https://www.highcharts.com/samples/data/' + name.toLowerCase() + '-c.json',    function (data) {
+
+        seriesOptions[i] = {
+            name: name,
+            data: data
+        };
+
+        // As we're loading the data asynchronously, we don't know what order it will arrive. So
+        // we keep a counter and create the chart when all the data is loaded.
+        seriesCounter += 1;
+
+        if (seriesCounter === names.length) {
+            createChart();
+        }
     });
 });
-    <!--setInterval(-->
-        <!--function getdata() {-->
-        <!--$.ajax({-->
-            <!--type : 'GET',-->
-            <!--url  : '/api/tram',-->
-            <!--dataType:'json',-->
-            <!--success : function(json){-->
-                <!--console.log(json);-->
-                <!--$.each(json, function(idx, obj) {-->
-                    <!--$("#"+obj.station_config).text(obj.value);-->
-                <!--});-->
-            <!--}-->
-        <!--});-->
-<!--},2500);-->
+
 </script>
 {% endblock content %}
