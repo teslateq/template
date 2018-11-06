@@ -52,7 +52,7 @@
   </div>
    <div class="col-sm-12">
     <div class="panel panel-primary ">
-        <div class="panel-heading">Giám sát chỉ số điệm năng {{stations.display_name}}</div>
+        <div class="panel-heading">Giám sát chỉ số điện năng {{stations.display_name}}</div>
         <div class="panel-body">
             <table class="table table-hover text-center">
                  <thead>
@@ -129,10 +129,18 @@
   <div class="col-sm-12">
     <div class="panel panel-primary ">
         <div class="panel-heading">Biểu đồ theo thời gian {{stations.display_name}}
-            Bắt đầu:
-            <input id="" type="date" style="color:#000"  required>
-            Kết thúc:
-            <input id="" type="date" style="color:#000"  required>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>Bắt đầu </label>
+                        <input id="" type="date" style="color:#000"  required>
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Kết thúc</label>
+                        <input id="" type="date" style="color:#000"  required>
+                    </div>
+                </div>
+
         </div>
         <div class="panel-body">
             <div id="container" style="height: 400px; min-width: 310px"></div>

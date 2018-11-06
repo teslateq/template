@@ -6,7 +6,47 @@
     <div class="panel panel-primary ">
         <div class="panel-heading">
             Bảng thống kê chất lượng nước {{stations.display_name}}
+             <div class="row">
+                      <div class="col-sm-6">
+                       <label>Tần xuất log data</label>
+                      <select class="form-control">
+                            <option selected=\'selected\' value="0" >1 phút</option>
+                            <option  value="1">5 phút</option>
+                            <option  value="2">10 phút</option>
+                            <option  value="3">15 phút</option>
+                            <option  value="4">30 phút</option>
+                            <option  value="4">1 giờ</option>
 
+                      </select>
+                    </div>
+
+                    <div class="col-sm-6">
+                       <label>Chọn nhanh khoảng thời gian</label>
+                       <select class="form-control">
+                            <option selected=\'selected\' value="0" >1 ngày</option>
+                            <option  value="1">1 tuần</option>
+                            <option  value="2">1 tháng</option>
+                      </select>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label>Bắt đầu </label>
+                        <input id="" type="date" class="form-control" style="color:#000"  required>
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Kết thúc</label>
+                        <input id="" type="date" class="form-control" style="color:#000"  required>
+                    </div>
+                </div>
+            </br>
+                 <div class=" row">
+                      <div class="col-sm-6">
+                           <button class="btn btn-info"" type="submit">Xem trước</button>
+                    </div>
+                    <div class="col-sm-6">
+                        <button class="btn btn-success" type="submit">Xuất excel</button>
+                    </div>
+                 </div>
         </div>
         <div class="panel-body ">
             <div class="table-responsive-sm">
