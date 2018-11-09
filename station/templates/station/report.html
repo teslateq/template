@@ -3,7 +3,7 @@
 
 <div class="row">
   <div class="col-sm-12">
-    <div class="panel panel-primary ">
+    <div class="panel ">
         <div class="panel-heading">
             Bảng thống kê chất lượng nước {{stations.display_name}}
              <div class="row">
@@ -31,11 +31,11 @@
 
                     <div class="col-sm-6">
                         <label>Bắt đầu </label>
-                        <input id="" type="date" class="form-control" style="color:#000"  required>
+                        <input id="bd" type="datetime-local" class="form-control" style="color:#000"  required>
                     </div>
                     <div class="col-sm-6">
                         <label>Kết thúc</label>
-                        <input id="" type="date" class="form-control" style="color:#000"  required>
+                        <input id="kt" type="datetime-local" class="form-control" style="color:#000"  required>
                     </div>
                 </div>
             </br>
@@ -93,25 +93,36 @@
   </div>
 </div>
 <script type="application/javascript">
-$(function() {
-    $("table").each(function() {
-        var $this = $(this);
-        var newrows = [];
-        $("table tbody tr").each(function(){
-            var i = 0;
-            $(this).find("td").each(function(){
-                i++;
-                if(newrows[i] === undefined) { newrows[i] = $("<tr></tr>"); }
-                newrows[i].append($(this));
-            });
-        });
-        $("table tbody tr").remove();
-        $.each(newrows, function(){
-            $this.append(this);
-        });
-    });
+function ngaygio(para,model) {
+	var thoigian = new Date(),ngaygio;
+	thoigian.setDate(thoigian.getDate() + para);
+	var day = thoigian.getDate();
+	var month = thoigian.getMonth() + 1 ;
+	var year =thoigian.getFullYear();
+    var hour = thoigian.getHours();
+    var minu = thoigian.getMinutes();
 
-    return false;
-});
+    if(month < 10){
+        month = "0" + month;
+    }
+    if(day < 10){
+        day = "0" + day;
+    }
+    if(hour < 10){
+            hour = "0" + hour;
+        }
+    if( minu< 10){
+            minu = "0" + minu;
+        }
+    if(model == 1)
+    	ngaygio = year+"-"+month+"-"+day+"T"+hour+":"+minu;
+    else
+    	ngaygio = year+"-"+month+"-"+day;
+    return  ngaygio;
+};
+<!--console.log(ngaygio(0,0));-->
+
+$('#bd').val(ngaygio(0,1)); $('#kt').val(ngaygio(-1,1));
+$('#bd').prop('max',ngaygio(0,1));
 </script>
 {% endblock content %}

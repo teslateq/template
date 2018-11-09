@@ -15,10 +15,10 @@
 <div class="row">
   {% for station in stations.stationconfig_set.all %}
   <div class="col-sm-4 ">
-    <div class="panel panel-primary ">
+    <div class="panel ">
         <div class="panel-heading">{{station.display_name}} (4.4 - 6.5) {{station.unit}} {{station.station}}</div>
         <div id="{{station.id}}" class="panel-body tbl1" style="">6.36 pH</div>
-        <div>12:12 12/12/2012</div>
+        <div class="text-primary">12:12 12/12/2012</div>
     </div>
   </div>
   {% endfor %}
@@ -26,7 +26,7 @@
 
 <div class="row">
    <div class="col-sm-12">
-    <div class="panel panel-primary ">
+    <div class="panel ">
         <div class="panel-heading" style="">Trạng thái điều khiển {{stations.display_name}}</div>
         <div class="panel-body">
             <table class="table table-hover text-center">
@@ -51,7 +51,7 @@
     </div>
   </div>
    <div class="col-sm-12">
-    <div class="panel panel-primary ">
+    <div class="panel">
         <div class="panel-heading">Giám sát chỉ số điện năng {{stations.display_name}}</div>
         <div class="panel-body">
             <table class="table table-hover text-center">
@@ -89,11 +89,10 @@
     </div>
   </div>
   <div class="col-sm-12">
-    <div class="panel panel-primary ">
+    <div class="panel  ">
         <div class="panel-heading" >
             Bảng giá trị max - min {{stations.display_name}} </br>
-            <input type="datetime-local" value="2018-06-12T19:30"
-               min="2018-06-07T00:00" max="2019-06-14T00:00" style="color:#000" />
+            <input type="date" id="bd" style="color:#000" />
         </div>
         <div class="panel-body ">
             <table class="table table-hover text-center">
@@ -107,18 +106,36 @@
                 <tbody>
                   <tr class="info">
                     <td>pH</td>
-                      <td><div>8.5 pH </br>21:43:25 12/02/1995</div></td>
-                    <td><div>4.5 pH </br>29:40:25 12/02/1995</div></td>
+                      <td>
+                          <div>8.5 pH</div>
+                          <div class="text-primary">29:40:25 12/02/2018</div>
+                      </td>
+                    <td>
+                        <div>4.5 pH</div>
+                        <div class="text-primary">29:40:25 12/02/2018</div>
+                    </td>
                   </tr>
                   <tr>
                     <td>Clo dư</td>
-                    <td><div>0.09 pH </br>21:43:45 12/02/1995</div></td>
-                    <td><div>0.02 pH </br>21:43:45 12/02/1995</div></td>
+                    <td>
+                        <div>0.09 pH</div>
+                        <div class="text-primary">29:40:25 12/02/2018</div>
+                    </td>
+                    <td>
+                        <div>0.02 pH</div>
+                        <div class="text-primary">29:40:25 12/02/2018</div>
+                    </td>
                   </tr>
                   <tr class="info">
                     <td>Độ đục</td>
-                    <td><div>0.35 pH </br>21:43:45 12/02/1995</div></td>
-                    <td><div>0.15 pH </br>21:43:45 12/02/1995</div></td>
+                    <td>
+                        <div>0.35 pH</div>
+                        <div class="text-primary">29:40:25 12/02/2018</div>
+                    </td>
+                    <td>
+                        <div>0.15 pH </div>
+                        <div class="text-primary">29:40:25 12/02/2018</div>
+                    </td>
                   </tr>
 
                 </tbody>
@@ -127,93 +144,113 @@
     </div>
   </div>
   <div class="col-sm-12">
-    <div class="panel panel-primary ">
+    <div class="panel">
         <div class="panel-heading">Biểu đồ theo thời gian {{stations.display_name}}
 
                 <div class="row">
                     <div class="col-sm-6">
-                        <label>Bắt đầu </label>
-                        <input id="" type="date" style="color:#000"  required>
+                        <label>Bắt đầu</label>
+                        <input id="chart_bd" class="chart" type="datetime-local" style="color:#000" required>
                     </div>
                     <div class="col-sm-6">
-                        <label>Kết thúc</label>
-                        <input id="" type="date" style="color:#000"  required>
+                        <label> Kết thúc</label>
+                        <input id="chart_kt" class="chart" type="datetime-local" style="color:#000" required>
                     </div>
                 </div>
 
         </div>
         <div class="panel-body">
-            <div id="container" style="height: 400px; min-width: 310px"></div>
+            <div id="container" style="height: 200px;"></div>
         </div>
     </div>
   </div>
 </div>
 <script type="application/javascript">
+function ngaygio(para,model) {
+	var thoigian = new Date(),ngaygio;
+	thoigian.setDate(thoigian.getDate() + para);
+	var day = thoigian.getDate();
+	var month = thoigian.getMonth() + 1 ;
+	var year =thoigian.getFullYear();
+    var hour = thoigian.getHours();
+    var minu = thoigian.getMinutes();
 
-var seriesOptions = [],
-    seriesCounter = 0,
-    names = ['MSFT', 'AAPL', 'GOOG'];
-
-/**
- * Create the chart when all data is loaded
- * @returns {undefined}
- */
-function createChart() {
-
-    Highcharts.stockChart('container', {
-
-        rangeSelector: {
-            selected: 4
-        },
-
-        yAxis: {
-            labels: {
-                formatter: function () {
-                    return (this.value > 0 ? ' + ' : '') + this.value + '%';
-                }
-            },
-            plotLines: [{
-                value: 0,
-                width: 2,
-                color: 'silver'
-            }]
-        },
-
-        plotOptions: {
-            series: {
-                compare: 'percent',
-                showInNavigator: true
-            }
-        },
-
-        tooltip: {
-            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.change}%)<br/>',
-            valueDecimals: 2,
-            split: true
-        },
-
-        series: seriesOptions
-    });
-}
-
-$.each(names, function (i, name) {
-
-    $.getJSON('https://www.highcharts.com/samples/data/' + name.toLowerCase() + '-c.json',    function (data) {
-
-        seriesOptions[i] = {
-            name: name,
-            data: data
-        };
-
-        // As we're loading the data asynchronously, we don't know what order it will arrive. So
-        // we keep a counter and create the chart when all the data is loaded.
-        seriesCounter += 1;
-
-        if (seriesCounter === names.length) {
-            createChart();
+    if(month < 10){
+        month = "0" + month;
+    }
+    if(day < 10){
+        day = "0" + day;
+    }
+    if(hour < 10){
+            hour = "0" + hour;
         }
-    });
-});
+    if( minu< 10){
+            minu = "0" + minu;
+        }
+    if(model == 1)
+    	ngaygio = year+"-"+month+"-"+day+"T"+hour+":"+minu;
+    else
+    	ngaygio = year+"-"+month+"-"+day;
+    return  ngaygio;
+};
+<!--console.log(ngaygio(0,0));-->
+
+$('#bd').val(ngaygio(0,0)); $('#chart_bd').val(ngaygio(-1,1));  $('#chart_kt').val(ngaygio(0,1));
+$('#bd').prop('max',ngaygio(0,0));
+$('#chart_kt').prop('max',ngaygio(0,1));
+
+
+
+
+<!--var seriesOptions = [],-->
+    <!--seriesCounter = 0,-->
+    <!--names = ['MSFT', 'AAPL', 'GOOG'];-->
+<!--function createChart() {-->
+    <!--Highcharts.stockChart('container', {-->
+        <!--rangeSelector: {-->
+            <!--selected: 4-->
+        <!--},-->
+        <!--yAxis: {-->
+            <!--labels: {-->
+                <!--formatter: function () {-->
+                    <!--return (this.value > 0 ? ' + ' : '') + this.value + '%';-->
+                <!--}-->
+            <!--},-->
+            <!--plotLines: [{-->
+                <!--value: 0,-->
+                <!--width: 2,-->
+                <!--color: 'silver'-->
+            <!--}]-->
+        <!--},-->
+
+        <!--plotOptions: {-->
+            <!--series: {-->
+                <!--compare: 'percent',-->
+                <!--showInNavigator: true-->
+            <!--}-->
+        <!--},-->
+
+        <!--tooltip: {-->
+            <!--pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.change}%)<br/>',-->
+            <!--valueDecimals: 2,-->
+            <!--split: true-->
+        <!--},-->
+
+        <!--series: seriesOptions-->
+    <!--});-->
+<!--}-->
+<!--$.each(names, function (i, name) {-->
+    <!--$.getJSON('https://www.highcharts.com/samples/data/' + name.toLowerCase() + '-c.json',    function (data) {-->
+        <!--seriesOptions[i] = {-->
+            <!--name: name,-->
+            <!--data: data-->
+        <!--};-->
+        <!--seriesCounter += 1;-->
+        <!--if (seriesCounter === names.length) {-->
+            <!--createChart();-->
+        <!--}-->
+    <!--});-->
+<!--});-->
 
 </script>
 {% endblock content %}

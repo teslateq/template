@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{% static '/bootstrap/css/bootstrap.min.css' %}">
     <!-- jQuery library -->
@@ -17,14 +17,58 @@
     <link rel="icon" type="image/png" href=" {{ project.logo_company.url }}" >
     <title>{{ project.name_project }}</title>
 </head>
-{% block style_css %}{% endblock style_css %}
+<style type="text/css" >
+#top_header{
+    background:{{ project.background_top_header }};
+}
+#top_header div a{
+    color:{{ project.color_top_header }};
+}
+.navbar {
+    border: none;
+    border-radius:0;font-weight: bold;
+    background:{{ project.background_header_menu }};
+}
+.navbar-form {
+    border: none;
+}
+#myNavbar ul li a {
+    background:{{ project.background_header_menu }};
+    color:{{ project.color_header_menu }};
+}
+#myNavbar ul li a:hover {
+    background: #fff;
+}
+.panel {
+    border: 1px solid {{ project.background_content_block }};
+}
+.panel-heading {
+    vertical-align: middle;font-weight: bold;
+    background:{{ project.background_content_block }};
+    color:{{ project.color_content_block }};
+}
+.panel-body.tbl1 {
+    vertical-align: middle ;
+    min-height: 80px;
+    line-height:80px;
+    font-size: 25px;
+}
+
+.footer {
+    color: {{ project.color_footer }};
+    background:{{ project.background_footer }};
+}
+
+</style>
+{% block css %}
+{% endblock css %}
 <body>
-    <div class="container-fluid "  style="background:#000000;">
+    <div class="container-fluid " id="top_header" style="">
         {% if user.is_authenticated%}
         <div style="text-align:right;margin:10px;">
-            <a href="{% url 'accounts:profile_view' %}" style="color:#ffffff;">
+            <a href="{% url 'accounts:profile_view' %}" >
                 <span class="glyphicon glyphicon-user"></span> {{ user }}</a>
-            <a href="{% url 'accounts:logout' %}" style="color:#ffffff;">
+            <a href="{% url 'accounts:logout' %}" >
                <span class="glyphicon glyphicon-log-in"></span> Logout</a>
             <i class="fa fa-plug" style="color:#ffffff;"></i>
             <i class="fa fa-battery-full" style="color:#ffffff;"></i>
@@ -33,57 +77,56 @@
         </div>
         {% endif %}
     </div>
-<img id="destop" src="{{ project.image_banner.url }}">
-<!--</div>-->
-
-<div class="row">
-    <div class="col-xs-12">
-
-        <nav class="navbar navbar-inverse ">
-        <!--<div class="container-fluid">-->
+    <img id="destop" src="{{ project.image_banner.url }}">
+    <nav class="navbar navbar-inverse ">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
-          {% if user.is_authenticated%}
-          <ul class="nav navbar-nav">
-             <li class="active"><a href="{% url 'manager:manager' %}">Quản lý</a></li>
-            <li class="active"><a href="{% url 'station:giam-sat' pk %}">Giám sát</a></li>
-            <li class="active"><a href="{% url 'station:bao-cao' pk %}">Báo cáo</a></li>
-            <li class="active"><a href="{% url 'station:dieu-khien' pk %}">Điều khiển</a></li>
-            <li class="active"><a href="{% url 'station:ban-do' pk %}">Bản đồ</a></li>
-            <li class="active"><a href="{% url 'station:canh-bao' pk %}">Cảnh báo</a></li>
-            <li class="active"><a href="{% url 'station:modbus' pk %}">Modbus</a></li>
-            <li class="active"><a href="{% url 'station:parameter' pk %}">Parameter</a></li>
-            <li class="active"><a href="{% url 'station:suc-khoe' pk %}">Sức khỏe</a></li>
-            <li class="active"><a href="{% url 'station:tai-khoan' pk %}">Tài khoản</a></li>
-
-          </ul>
-           {% endif %}
+        {% if user.is_authenticated%}
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="{% url 'station:giam-sat' pk %}">Giám sát</a></li>
+                <li class="active"><a href="{% url 'station:bao-cao' pk %}">Báo cáo</a></li>
+                <li class="active"><a href="{% url 'station:dieu-khien' pk %}">Điều khiển</a></li>
+                <li class="active"><a href="{% url 'station:ban-do' pk %}">Bản đồ</a></li>
+                <li class="active"><a href="{% url 'station:canh-bao' pk %}">Cảnh báo</a></li>
+                <li class="active"><a href="{% url 'station:modbus' pk %}">Modbus</a></li>
+                <li class="active"><a href="{% url 'station:parameter' pk %}">Parameter</a></li>
+                <li class="active"><a href="{% url 'station:suc-khoe' pk %}">Sức khỏe</a></li>
+                <li class="active"><a href="{% url 'station:tai-khoan' pk %}">Tài khoản</a></li>
+                <li class="active"><a href="{% url 'manager:manager' %}">Quản lý</a></li>
+            </ul>
+        {% endif %}
         </div>
-        </nav>
+    </nav>
+<div class="container-fluid "  style="">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="container-fluid text-center">
+                {% block content %}
+                {% endblock content %}
+            </div>
+        </div>
+        <div class="col-xs-12 text-center" style="margin-bottom:50px;">
+                &copy; Bản quyền thuộc về
+                <a  href="{{ project.web_company }}" target="_blank">
+                {{ project.company_name }}
+            </a>
+        </div>
+        <div class="navbar-fixed-bottom" style="background:#F57A1C;padding-top: 7px;">
+            <div class="row text-center" style="vertical-align: middle;">
+                <div class="col-xs-4"><a href="tel:0902555793" style="color:#fff;"><img src="http://ad.teslateq.vn/wp-content/themes/Newspaper/images/goidien.png" style="margin-bottom:10px; width:24px; height: 20px;"/> Gọi điện</a></div>
+                <div class="col-xs-4"><a href="http://zalo.me/0902555793" style="color:#fff;"><img src="http://ad.teslateq.vn/wp-content/themes/Newspaper/images/zalo.png" style="margin-bottom:10px; width:24px; height: 20px;"/> Zalo</a></div>
+                <div class="col-xs-4"><a href="https://teslateq.vn/contact" target="_blank" style="color:#fff;padding-right:10px"><img src="http://ad.teslateq.vn/wp-content/themes/Newspaper/images/chiduong.png" style="margin-bottom:10px; width:24px; height: 20px;"/> Liên hệ</a></div>
+            </div>
+        </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-xs-12">
-        <div class="container-fluid text-center">
-            {% block content %}
-            {% endblock content %}
-        </div>
-    </div>
-</div>
 
-<div class="footer">&copy; Bản quyền thuộc về
-        <a  href="{{ project.web_company }}" target="_blank">
-            {{ project.company_name }}
-        </a>
-</div>
-{% block map %}
-{% endblock map %}
 </body>
 </html>
 

@@ -1,21 +1,7 @@
-html {
+html, body {
+  margin: 0;padding: 0;
   height: 100%;
-  box-sizing: border-box;
-  margin: 0 ;
-  padding: 0;
-}
-
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-}
-body {
-  position: relative;
-  margin: 0;
-  padding-bottom: 6rem;
-  min-height: 100%;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Helvetica, Arial, Tahoma, sans-serif;
   font-size: 17px;
 }
 img {
@@ -24,32 +10,42 @@ img {
     vertical-align: middle;
 }
 
-.navbar{
-    border: none;
-    border-radius:0;
-    background:#FCCD0E;font-weight: bold;
-}
-.navbar-form{
- border: none;
-}
-#myNavbar ul li a{
-    background:#FCCD0E;
-    color:#000;
-}
-#myNavbar ul li a:hover {
-    background: #fff;
-}
+
 .table tr td {
     vertical-align: middle !important;
 }
+@media screen and (max-width: 768px) {
+    table#pa thead tr th{
+        font-size: 90%; text-align: center;vertical-align: middle;
+    }
+    table#pa thead tr td{
+        font-size: 90%; text-align: center;vertical-align: middle;
+    }
+    table#pa tbody tr td {
+        font-size: 90%;text-align: center;vertical-align: middle;
+    }
+}
 
-.footer {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    padding: 1rem;
-    color: #ffffff;
-    text-align: center;
-    background:#0B0A0A;
+@media screen and (max-width: 568px) {
+    table#pa thead tr th{
+        font-size: 10px; text-align: center;vertical-align: middle;
+    }
+    table#pa thead tr td{
+        font-size: 10px; text-align: center;vertical-align: middle;
+    }
+    table#pa tbody tr td {
+        font-size: 10px;text-align: center;vertical-align: middle;
+    }
+}
+
+@media screen and (max-width: 414px) {
+    table#pa thead tr th{
+        font-size: 7px; text-align: center;vertical-align: middle;
+    }
+    table#pa thead tr td{
+        font-size: 7px; text-align: center;vertical-align: middle;
+    }
+    table#pa tbody tr td {
+        font-size: 7px;text-align: center;vertical-align: middle;
+    }
 }

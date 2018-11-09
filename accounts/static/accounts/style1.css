@@ -1,0 +1,43 @@
+
+
+
+
+/* -------------------- Resets --------------------- */
+body, form, fieldset, ol, ul, li, h1, h2, h3, h4, h5, h6, p {
+margin:0;
+padding:0;
+}
+img {
+border:0; /* kills Gecko bug when img's are placed inside links */
+vertical-align:bottom; /* set vertical align to bottom for IE */
+}
+/* ------------------- Defaults ------------------- */
+html, body {
+    height: 100%;
+    margin: 0 ;
+    padding: 0;
+}
+.container, .container > div, .container > div #map-canvas {
+    height: inherit;
+    margin-bottom:15px;
+}
+
+body {
+  margin: 0;
+  padding-bottom: 6rem;
+  min-height: 100%;
+  font-family: 'Raleway', sans-serif;
+  font-size: 17px;
+}
+img {
+    height: auto;
+    max-width: 100%;
+    vertical-align: middle;
+}
+
+.table tr td {
+    vertical-align: middle !important;
+}
+
+
+

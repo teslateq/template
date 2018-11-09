@@ -7,7 +7,7 @@
 
 <div class="row">
   <div class="col-xs-12 col-sm-6 col-sm-offset-3">
-    <div class="panel panel-primary ">
+    <div class="panel">
         <div class="panel-heading">Bảng điều khiển {{stations.display_name}}</div>
         <div class="panel-body ">
               <table class="table text-center">
@@ -61,22 +61,22 @@ $(function() {
         $.getJSON( "/sim/api/control/{{stations.id}}/", function( data ) {
             console.log(data);
             if(data.r1 == 1)
-                $("#r1").html('<i class="fa fa-check fa-2x" style="color:green"></i>');
+                $("#r1").html('<i class="fa fa-check " style="color:green"></i>');
             if(data.r1 == 0)
-                $("#r1").html('<i class="fa fa-times fa-2x"></i>');
+                $("#r1").html('<i class="fa fa-times "></i>');
             if(data.r2 == 1)
-                $("#r2").html('<i class="fa fa-check fa-2x" style="color:green"></i>');
+                $("#r2").html('<i class="fa fa-check " style="color:green"></i>');
             if(data.r2 == 0)
-                $("#r2").html('<i class="fa fa-times fa-2x"></i>');
+                $("#r2").html('<i class="fa fa-times "></i>');
 
             if(data.s1 == 1)
-                $("#s1").html('<i class="fa fa-check fa-2x" style="color:green"></i>');
+                $("#s1").html('<i style="color:green" class="fa fa-circle "> Bật</i>');
             if(data.s1 == 0)
-                $("#s1").html('<i class="fa fa-times fa-2x"></i>');
+                $("#s1").html('<i style="color:red" class="fa fa-circle"> Tắt</i>');
             if(data.s2 == 1)
-                $("#s2").html('<i class="fa fa-check fa-2x" style="color:green"></i>');
+                $("#s2").html('<i style="color:green" class="fa fa-circle "> Bật</i>');
             if(data.s2 == 0)
-                $("#s2").html('<i class="fa fa-times fa-2x"></i>');
+                $("#s2").html('<i style="color:red" class="fa fa-circle "> Tắt</i>');
         });
     },1000);
 })
