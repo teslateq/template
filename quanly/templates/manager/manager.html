@@ -99,9 +99,8 @@
           </ul>
              <form class="navbar-form navbar-right" action="">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Tìm kiếm trạm">
+                    <input type="text" class="form-control"  id="myInput" placeholder="Tìm kiếm trạm">
                 </div>
-                <button type="submit" class="btn btn-default">Search</button>
              </form>
            {% endif %}
         </div>
@@ -136,11 +135,14 @@
                       <div class="col-xs-12">
                           <span class="glyphicon glyphicon-time text-primary" > 12:34 06/11/2018</span>
                       </div>
+
                       </div>
+
                  </div>
             </div>
         </div>
         {% endfor %}
+
         <div class="col-xs-12 text-center" style="margin-bottom:50px;">
                 &copy; Bản quyền thuộc về
                 <a  href="{{ project.web_company }}" target="_blank">
@@ -158,14 +160,16 @@
      </div>
 </div>
 <script type="application/javascript">
-  $('a.station').click(function () {
-    var id  = $(this).data('id');
-    <!--console.log(id);-->
-    $.ajax('ajax_station_detail/' + id).done(function (data) {
-      $('#id_station_detail').html(data);
-      <!--console.log(data);-->
-    })
+
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    console.log(value);
+    $(".panel").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
   });
+});
 </script>
 </body>
 </html>

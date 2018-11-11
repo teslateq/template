@@ -149,3 +149,13 @@ class CreateView(TemplateView):
 class TeView(LoginRequiredMixin,TemplateView):
     login_url = '/account/'
     template_name = 'station/map1.html'
+
+class LanguageView(LoginRequiredMixin,TemplateView):
+    login_url = '/account/'
+    template_name = 'station/language.html'
+    def get_context_data(self, **kwargs):
+        context = super(LanguageView, self).get_context_data(**kwargs)
+        context['station']  = Station.objects.get(pk = kwargs['pk'])
+        p = Project.objects.all()
+        context['project'] = p[0]
+        return context

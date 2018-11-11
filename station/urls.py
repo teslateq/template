@@ -3,7 +3,7 @@ from station.views import (
     StationView, ControlView, ReportView,
     MapView,HealthyView,AlarmView,
     ParameterView, ModbusView,AccountView,
-    GroupView,CreateView,GroupListView,TeView
+    GroupView,CreateView,GroupListView,TeView,LanguageView
 )
     # , ControlView, StationView ,ReportView
 # from station.views.station_view import StationView
@@ -25,6 +25,7 @@ urlpatterns = [
     path('<int:pk>/account/group/', GroupView.as_view(),name ='group'),
     path('<int:pk>/account/group/list', GroupListView.as_view(),name ='group-list'),
     path('<int:pk>/account/create/', CreateView.as_view(),name ='create'),
+    path('<int:pk>/language/', LanguageView.as_view(),name ='language'),
     # path('data_ph/', pHView.as_view(),name =''),
     # path('data_clo/',CloView.as_view(),name =''),
     # path('data_tubi/', TubiView.as_view(),name =''),

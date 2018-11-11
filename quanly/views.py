@@ -16,16 +16,6 @@ class ManagerView(LoginRequiredMixin,TemplateView):
         context['project'] = p[0]
         return context
 
-# class ReportView(LoginRequiredMixin,TemplateView):
-#     login_url = '/account/'
-#     template_name = 'manager/report.html'
-#     def get_context_data(self, **kwargs):
-#         context = super(ReportView, self).get_context_data(**kwargs)
-#         id = self.request.GET['id']
-#         station = Station.objects.get(id=id)
-#         context['station'] = station
-#         return context
-
 class AjaxStationDetailView(LoginRequiredMixin,TemplateView):
     login_url = '/account/'
     template_name = 'manager/station_detail.html'
@@ -35,15 +25,8 @@ class AjaxStationDetailView(LoginRequiredMixin,TemplateView):
         station = Station.objects.get(pk = kwargs['pk'])
         context['station'] = station
         return context
-#
-# class ControlView(LoginRequiredMixin,TemplateView):
-#     login_url = '/account/'
-#     template_name = 'manager/control.html'
 
-    # def get_context_data(self, **kwargs):
-    #     context = super(ReportView, self).get_context_data(**kwargs)
-    #     id = self.request.GET['id']
-    #     station = Station.objects.get(id=id)
-    #     context['station'] = station
-    #
-    #     return context
+
+class LanguageView(LoginRequiredMixin,TemplateView):
+    login_url = '/account/'
+    template_name = 'manager/language.html'

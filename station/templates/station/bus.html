@@ -1,0 +1,87 @@
+{%  extends 'base.html' %}
+{% block content %}
+
+<div class="row">
+  <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+    <div class="panel">
+        <div class="panel-heading">
+           Cấu hình modbus {{stations.display_name}}
+        </div>
+        <div class="panel-body ">
+            <form>
+                <label >Cài đặt Master</label>
+                <div class="form-group row">
+                    <div class="form-group col-md-6">
+                    <label>Baud master</label>
+                       <select class="form-control">
+                            <option  value="0" >4800</option>
+                            <option  value="1">9600</option>
+                            <option  value="2">14400</option>
+                            <option  value="3">19200</option>
+                            <option  value="4">28800</option>
+                            <option  value="5">38400</option>
+                            <option  value="6">56000</option>
+                            <option  value="7">57600</option>
+                            <option  value="8">115200</option>
+                            <option selected=\'selected\' value="9">128000</option>
+                            <option  value="A">256000</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                       <label>Address master</label>
+                      <input type="text" class="form-control"placeholder="Giá trị pH mức cao">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                       <label>Register master</label>
+                      <input type="text" class="form-control"placeholder="Giá trị pH mức cao">
+                    </div>
+                    <div class="form-group col-md-6">
+                       <label>Length master</label>
+                      <input type="text" class="form-control"placeholder="Giá trị pH mức cao">
+                    </div>
+                </div>
+
+                <label >Cài đặt Slave</label>
+                <div class="form-group row">
+                    <div class="form-group col-md-6">
+                    <label>Baud slave</label>
+                       <select class="form-control">
+                            <option  value="0" >4800</option>
+                            <option  value="1">9600</option>
+                            <option  value="2">14400</option>
+                            <option  value="3">19200</option>
+                            <option  value="4">28800</option>
+                            <option  value="5">38400</option>
+                            <option  value="6">56000</option>
+                            <option  value="7">57600</option>
+                            <option  value="8">115200</option>
+                            <option selected=\'selected\' value="9">128000</option>
+                            <option  value="A">256000</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                       <label>Address slave</label>
+                      <input type="text" class="form-control"placeholder="Giá trị pH mức cao">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="text-center">
+                      <button type="submit" class="btn btn-primary">Lưu</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>
+</div>
+<script type="application/javascript">
+
+</script>
+{% endblock content %}
+
+
+
+
+
