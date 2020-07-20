@@ -88,12 +88,12 @@ class ModbusView(TemplateView):
             context['upd'] = 1
         if(m[0].upd == False):
             context['upd'] = 0
-        context['baud_master'] = m[0].baud_master
-        context['address_master'] = m[0].address_master
-        context['baud_slave'] = m[0].baud_slave
-        context['address_slave'] = m[0].address_slave
-        context['address_resgiter_master'] = m[0].address_resgiter_master
-        context['length_resgiter_master'] = m[0].length_resgiter_master
+        context['baud_main'] = m[0].baud_main
+        context['address_main'] = m[0].address_main
+        context['baud_subordinate'] = m[0].baud_subordinate
+        context['address_subordinate'] = m[0].address_subordinate
+        context['address_resgiter_main'] = m[0].address_resgiter_main
+        context['length_resgiter_main'] = m[0].length_resgiter_main
         status = Status.objects.all()
         if(status[0].cnn == True):
             context['cnn'] = 1
@@ -119,13 +119,13 @@ class ModbusView(TemplateView):
             context['r2'] = 0
         return context
 
-    # address_master = models.CharField(max_length=2)
-    # address_resgiter_master = models.CharField(max_length=4)
-    # length_resgiter_master
+    # address_main = models.CharField(max_length=2)
+    # address_resgiter_main = models.CharField(max_length=4)
+    # length_resgiter_main
 
 # def index(request):
 #     m = ModbusRTU.objects.all()
-#     context = {'modbus': m[0].baud_master}
+#     context = {'modbus': m[0].baud_main}
 #     return render(request, 'sim/modbus.html', context)
 
 class SimListView(TemplateView):

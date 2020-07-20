@@ -92,12 +92,12 @@ class Modbus(models.Model):
         ('9', '128000'),
         ('A', '256000'),
     )
-    baud_master = models.CharField(max_length=1,choices=BAUD_CHOICES,default='9')
-    address_master = models.CharField(max_length=2)
-    baud_slave = models.CharField(max_length=1,choices=BAUD_CHOICES,default='9')
-    address_slave = models.CharField(max_length=2)
-    address_resgiter_master = models.CharField(max_length=4)
-    length_resgiter_master = models.CharField(max_length=4)
+    baud_main = models.CharField(max_length=1,choices=BAUD_CHOICES,default='9')
+    address_main = models.CharField(max_length=2)
+    baud_subordinate = models.CharField(max_length=1,choices=BAUD_CHOICES,default='9')
+    address_subordinate = models.CharField(max_length=2)
+    address_resgiter_main = models.CharField(max_length=4)
+    length_resgiter_main = models.CharField(max_length=4)
     upd = models.BooleanField(default=0)
     ngaygio = models.DateTimeField(auto_now_add=True, blank=True)
 

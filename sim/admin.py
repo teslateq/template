@@ -18,7 +18,7 @@ class StationHealthyValueAdmin(admin.ModelAdmin):
     list_filter = ['station_healthy__station']
 
 class ModbusAdmin(admin.ModelAdmin):
-    list_display = ['station','baud_master','address_master','address_resgiter_master','length_resgiter_master']
+    list_display = ['station','baud_main','address_main','address_resgiter_main','length_resgiter_main']
     # list_filter = ['station__station']
 
 class ParameterAdmin(admin.ModelAdmin):
